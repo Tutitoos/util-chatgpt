@@ -1,6 +1,6 @@
 {
   "name": "util-chatgpt",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Tutitoos",
   "license": "MIT",
   "repository": {
@@ -8,6 +8,9 @@
     "url": "git+https://github.com/Tutitoos/util-chatgpt.git"
   },
   "publisher": "Tutitoos",
+  "bin": {
+    "chatgpt": "dist/index.js"
+  },
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "scripts": {
