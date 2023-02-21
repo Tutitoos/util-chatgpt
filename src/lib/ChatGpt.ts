@@ -1,10 +1,20 @@
-import type { ChatGptOptions, ChatGptResponse, ChatGptResponseData, ChatGptResponseError } from "../types/chatgpt";
+import type { ChatGptModels, ChatGptOptions, ChatGptResponse, ChatGptResponseData, ChatGptResponseError } from "../types/chatgpt";
 import fetch from "node-fetch";
 
 class ChatGpt {
   apiKey: string = process.env.OPENAI_API_KEY!;
+  model: ChatGptModels;
+  prompt: string;
 
-  async getCode(prompt: string) {
+  setModel(model: ChatGptModels) {
+    this.model = model ?? "text-davinci-003";
+  }
+
+  setPrompt(prompt: string) {
+    this.prompt = prompt;
+  }
+
+  async getCode() {
     const response = await this.fetchCompletions({
       // eslint-disable-next-line @typescript-eslint/naming-convention
       top_p: 1,
@@ -17,8 +27,8 @@ class ChatGpt {
       presence_penalty: 0,
       // eslint-disable-next-line @typescript-eslint/naming-convention
       frequency_penalty: 0,
-      model: "text-davinci-003",
-      prompt,
+      model: this.model,
+      prompt: this.prompt,
     });
 
     if (!response) {

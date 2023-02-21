@@ -11,7 +11,9 @@ const main = async () => {
     const chatGpt = new ChatGpt();
     cli.start();
 
-    const code = await chatGpt.getCode(cli.prompt);
+    chatGpt.setModel(cli.modelChatGpt);
+    chatGpt.setPrompt(cli.prompt);
+    const code = await chatGpt.getCode();
     spinner.stop();
 
     console.log(cli.parseGrid(code).join("\n"));

@@ -1,7 +1,9 @@
+import type { ChatGptModels } from "../types/chatgpt";
 import { highlight } from "cli-highlight";
 import { Command } from "commander";
 
 class Cli {
+  modelChatGpt: ChatGptModels;
   prompt: string;
   isError: boolean;
 
@@ -10,11 +12,15 @@ class Cli {
   }
 
   start() {
-    const { args } = new Command()
-      .option("-y, --force", "Run the generated program without asking for confirmation")
+    const command = new Command()
+      .requiredOption("--model <name>", "Type of use model chatgpt: 'text-davinci-003'")
       .argument("<prompt...>", "Description of the command to execute")
       .parse(process.argv);
 
+    const model = command.getOptionValue("model") as ChatGptModels;
+    const args = command.processedArgs as string[];
+
+    this.modelChatGpt = model;
     this.prompt = this.parsePrompt(args);
   }
 
