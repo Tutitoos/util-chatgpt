@@ -1,4 +1,5 @@
-export type ChatGptModels = "text-davinci-003";
+export type ChatGptModels = "text-davinci-003" | "text-curie-001" | "text-babbage-001" | "text-ada-001";
+export type ChatGptModelsShort = "davinci" | "curie" | "babbage" | "ada";
 
 export interface ChatGptOptions {
   top_p: number;

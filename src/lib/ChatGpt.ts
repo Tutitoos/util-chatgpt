@@ -7,7 +7,7 @@ class ChatGpt {
   prompt: string;
 
   setModel(model: ChatGptModels) {
-    this.model = model ?? "text-davinci-003";
+    this.model = model;
   }
 
   setPrompt(prompt: string) {

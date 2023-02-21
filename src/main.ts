@@ -11,7 +11,11 @@ const main = async () => {
     const chatGpt = new ChatGpt();
     cli.start();
 
-    chatGpt.setModel(cli.modelChatGpt);
+    if (!cli.model) {
+      throw new Error("The chatGpt model is not valid");
+    }
+
+    chatGpt.setModel(cli.model);
     chatGpt.setPrompt(cli.prompt);
     const code = await chatGpt.getCode();
     spinner.stop();

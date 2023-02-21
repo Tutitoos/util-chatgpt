@@ -1,9 +1,9 @@
-import type { ChatGptModels } from "../types/chatgpt";
+import type { ChatGptModels, ChatGptModelsShort } from "../types/chatgpt";
 import { highlight } from "cli-highlight";
 import { Command } from "commander";
 
 class Cli {
-  modelChatGpt: ChatGptModels;
+  model: ChatGptModels | null;
   prompt: string;
   isError: boolean;
 
@@ -13,19 +13,47 @@ class Cli {
 
   start() {
     const command = new Command()
-      .requiredOption("--model <name>", "Type of use model chatgpt: 'text-davinci-003'")
+      .requiredOption("--model <name>", "Type of use model chatgpt: 'davinci', 'curie', 'babbage', 'ada'")
       .argument("<prompt...>", "Description of the command to execute")
       .parse(process.argv);
 
-    const model = command.getOptionValue("model") as ChatGptModels;
+    const model = command.getOptionValue("model") as ChatGptModelsShort;
     const args = command.processedArgs as string[];
 
-    this.modelChatGpt = model;
+    this.model = this.parseModel(model);
     this.prompt = this.parsePrompt(args);
   }
 
   stop() {
     process.exit(this.isError ? 0 : 1);
+  }
+
+  parseModel(modelChatGpt: ChatGptModelsShort): ChatGptModels | null {
+    if (!modelChatGpt) {
+      throw new Error("Missing model with chatGpt");
+    }
+
+    switch (modelChatGpt) {
+      case "ada": {
+        return "text-ada-001";
+      }
+
+      case "babbage": {
+        return "text-babbage-001";
+      }
+
+      case "curie": {
+        return "text-curie-001";
+      }
+
+      case "davinci": {
+        return "text-davinci-003";
+      }
+
+      default: {
+        return null;
+      }
+    }
   }
 
   parsePrompt(args: string[]) {
