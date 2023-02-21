@@ -3,7 +3,7 @@ import Cli from "./lib/Cli";
 import Spinner from "./lib/Spinner";
 
 const main = async () => {
-  const spinner = new Spinner("Analize your quest...");
+  const spinner = new Spinner("Analyzing your question...");
   spinner.start();
 
   const cli = new Cli();
