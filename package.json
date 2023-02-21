@@ -9,7 +9,7 @@
   },
   "publisher": "Tutitoos",
   "bin": {
-    "chatgpt": "dist/index.js"
+    "util-chatgpt": "dist/index.js"
   },
   "main": "dist/index.js",
   "types": "types/index.d.ts",
