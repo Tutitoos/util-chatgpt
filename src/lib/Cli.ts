@@ -3,7 +3,7 @@ import { highlight } from "cli-highlight";
 import { Command } from "commander";
 
 class Cli {
-  model: ChatGptModels | null;
+  model: ChatGptModels;
   prompt: string;
   isError: boolean;
 
@@ -13,7 +13,7 @@ class Cli {
 
   start() {
     const command = new Command()
-      .requiredOption("--model <name>", "Type of use model chatgpt: 'davinci', 'curie', 'babbage', 'ada'")
+      .option("--model <name>", "Type of use model chatgpt: 'davinci', 'curie', 'babbage', 'ada'")
       .argument("<prompt...>", "Description of the command to execute")
       .parse(process.argv);
 
@@ -28,11 +28,7 @@ class Cli {
     process.exit(this.isError ? 0 : 1);
   }
 
-  parseModel(modelChatGpt: ChatGptModelsShort): ChatGptModels | null {
-    if (!modelChatGpt) {
-      throw new Error("Missing model with chatGpt");
-    }
-
+  parseModel(modelChatGpt: ChatGptModelsShort): ChatGptModels {
     switch (modelChatGpt) {
       case "ada": {
         return "text-ada-001";
@@ -46,12 +42,9 @@ class Cli {
         return "text-curie-001";
       }
 
-      case "davinci": {
-        return "text-davinci-003";
-      }
-
+      case "davinci":
       default: {
-        return null;
+        return "text-davinci-003";
       }
     }
   }
