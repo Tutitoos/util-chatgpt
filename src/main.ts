@@ -14,7 +14,8 @@ const main = async () => {
     const code = await chatGpt.getCode(cli.prompt);
     spinner.stop();
 
-    console.log(cli.parseGrid(code));
+    console.log(cli.parseGrid(code).join("\n"));
+    process.exit();
   } catch (error: unknown) {
     const { message } = error as Error;
 
