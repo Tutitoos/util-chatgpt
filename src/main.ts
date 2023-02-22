@@ -1,34 +1,21 @@
 import ChatGpt from "./lib/ChatGpt";
 import Cli from "./lib/Cli";
-import Spinner from "./lib/Spinner";
+import type { ChatGptModelsShort } from "./types/chatgpt";
 
-const main = async () => {
-  const spinner = new Spinner("Analyzing your question...");
-  spinner.start();
-
-  const cli = new Cli();
+const main = async ({ model, prompt }: { model?: ChatGptModelsShort; prompt: string[] }) => {
   try {
+    const cli = new Cli();
     const chatGpt = new ChatGpt();
-    cli.start();
 
-    chatGpt.setModel(cli.model);
-    chatGpt.setPrompt(cli.prompt);
+    chatGpt.setModel(cli.parseModel(model ?? "davinci"));
+    chatGpt.setPrompt(cli.parsePrompt(prompt));
     const code = await chatGpt.getCode();
-    spinner.stop();
 
-    console.log(cli.parseGrid(code).join("\n"));
-    process.exit();
+    return cli.parseGrid(code).join("\n");
   } catch (error: unknown) {
     const { message } = error as Error;
 
-    cli.isError = true;
-    spinner.setModal({
-      text: message,
-      color: "red",
-      spinnerType: "error",
-    });
-  } finally {
-    cli.stop();
+    throw new Error(`Error: ${message}`);
   }
 };
 

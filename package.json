@@ -1,6 +1,6 @@
 {
   "name": "util-chatgpt",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "author": "Tutitoos",
   "license": "MIT",
   "repository": {
@@ -9,10 +9,10 @@
   },
   "publisher": "Tutitoos",
   "bin": {
-    "chatgpt": "dist/index.js"
+    "chatgpt": "dist/mainCli.js"
   },
   "main": "dist/index.js",
-  "types": "types/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
@@ -26,15 +26,15 @@
   "dependencies": {
     "chalk": "4.1.2",
     "cli-highlight": "2.1.11",
-    "cli-spinners": "^2.7.0",
-    "figlet": "^1.5.2",
-    "nanospinner": "^1.1.0",
+    "cli-spinners": "2.7.0",
+    "figlet": "1.5.2",
+    "nanospinner": "1.1.0",
     "node-fetch": "2.6.2",
     "ora": "6.1.2"
   },
   "devDependencies": {
     "@types/chalk": "2.2.0",
-    "@types/figlet": "^1.5.5",
+    "@types/figlet": "1.5.5",
     "@types/node": "18.14.0",
     "@types/node-fetch": "2.6.2",
     "@typescript-eslint/eslint-plugin": "5.53.0",
