@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import ChatGpt from "./lib/ChatGpt";
 import Cli from "./lib/Cli";
 import Spinner from "./lib/Spinner";
