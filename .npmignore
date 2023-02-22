@@ -6,3 +6,4 @@ tsconfig.json
 .lintstagedrc.json
 node_modules/
 src/
+test.js
