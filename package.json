@@ -1,6 +1,6 @@
 {
   "name": "util-chatgpt",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "author": "Tutitoos",
   "license": "MIT",
   "repository": {
@@ -9,14 +9,16 @@
   },
   "publisher": "Tutitoos",
   "bin": {
+    "util-chatgpt": "dist/main.js",
     "chatgpt": "dist/mainCli.js"
   },
-  "main": "dist/index.js",
-  "types": "dist/types/index.d.ts",
+  "main": "dist/main.js",
+  "types": "dist/types/main.d.ts",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "ts-node-dev --respawn --transpile-only --poll src/index.ts",
+    "start": "node dist/main.js",
+    "dev": "ts-node-dev --respawn --transpile-only --poll src/main.ts",
+    "test": "node test.js",
     "lint": "npm run lint:rome && npm run lint:eslint && npm run lint:staged",
     "lint:rome": "rome check src",
     "lint:eslint": "eslint --ignore-path .gitignore . --max-warnings 0",
@@ -46,7 +48,8 @@
     "lint-staged": "13.1.2",
     "ts-node": "10.9.1",
     "ts-node-dev": "2.0.0",
-    "typescript": "4.9.5"
+    "typescript": "4.9.5",
+    "util-chatgpt": "^1.0.9"
   },
   "bugs": {
     "url": "https://github.com/Tutitoos/util-chatgpt/issues"

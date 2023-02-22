@@ -1,14 +1,16 @@
+#!/usr/bin/env node
+
 import ChatGpt from "./lib/ChatGpt";
 import Cli from "./lib/Cli";
 import type { ChatGptModelsShort } from "./types/chatgpt";
 
-const main = async ({ model, prompt }: { model?: ChatGptModelsShort; prompt: string[] }) => {
+const main = async ({ model, prompt }: { model?: ChatGptModelsShort; prompt: string }) => {
   try {
     const cli = new Cli();
     const chatGpt = new ChatGpt();
 
     chatGpt.setModel(cli.parseModel(model ?? "davinci"));
-    chatGpt.setPrompt(cli.parsePrompt(prompt));
+    chatGpt.setPrompt(cli.parsePrompt([prompt]));
     const code = await chatGpt.getCode();
 
     return cli.parseGrid(code).join("\n");
