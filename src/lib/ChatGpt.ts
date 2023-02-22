@@ -1,5 +1,5 @@
 import type { ChatGptModels, ChatGptOptions, ChatGptResponse, ChatGptResponseData, ChatGptResponseError } from "../types/chatgpt";
-import fetch from "node-fetch";
+import axios from "axios";
 
 class ChatGpt {
   apiKey: string = process.env.OPENAI_API_KEY!;
@@ -39,17 +39,15 @@ class ChatGpt {
   }
 
   async fetchCompletions(options: ChatGptOptions) {
-    const response = await fetch("https://api.openai.com/v1/completions", {
-      method: "POST",
+    const response = await axios.post<ChatGptResponse>("https://api.openai.com/v1/completions", options, {
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${this.apiKey}`,
       },
-      body: JSON.stringify(options),
     });
 
     const statusCode = response.status;
-    const responseBody = (await response.json()) as ChatGptResponse;
+    const responseBody = response.data;
 
     if (statusCode !== 200) {
       const { message } = (responseBody as ChatGptResponseError).error;

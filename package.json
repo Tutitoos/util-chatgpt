@@ -1,6 +1,6 @@
 {
   "name": "util-chatgpt",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "author": "Tutitoos",
   "license": "MIT",
   "repository": {
@@ -17,7 +17,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/main.js",
-    "dev": "ts-node-dev --respawn --transpile-only --poll src/main.ts",
+    "dev": "ts-node-dev --respawn --transpile-only --poll src/mainCli.ts",
     "test": "node test.js",
     "lint": "npm run lint:rome && npm run lint:eslint && npm run lint:staged",
     "lint:rome": "rome check src",
@@ -26,6 +26,7 @@
     "lint:install": "npm install -g rome eslint lint-staged"
   },
   "dependencies": {
+    "axios": "1.3.3",
     "chalk": "4.1.2",
     "cli-highlight": "2.1.11",
     "cli-spinners": "2.7.0",
@@ -35,6 +36,7 @@
     "ora": "6.1.2"
   },
   "devDependencies": {
+    "@types/axios": "0.14.0",
     "@types/chalk": "2.2.0",
     "@types/figlet": "1.5.5",
     "@types/node": "18.14.0",
@@ -49,7 +51,7 @@
     "ts-node": "10.9.1",
     "ts-node-dev": "2.0.0",
     "typescript": "4.9.5",
-    "util-chatgpt": "^1.0.9"
+    "util-chatgpt": "1.0.10"
   },
   "bugs": {
     "url": "https://github.com/Tutitoos/util-chatgpt/issues"
